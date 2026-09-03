@@ -22,7 +22,7 @@ The static site is written to `out/`.
 
 ## GitHub Pages
 
-The site is configured for the `busemaker` project repository and deploys automatically from `main` via GitHub Actions.
+The site deploys automatically from `main` via GitHub Actions and is connected to `busemaker.com`.
 
 ## Updating content and assets
 

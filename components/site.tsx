@@ -9,7 +9,7 @@ import { useLanguage } from "./language-provider";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const siteBasePath = process.env.NODE_ENV === "production" ? "/busemaker" : "";
+const siteBasePath = "";
 
 function assetPath(path: string) {
   return path.startsWith("/") ? `${siteBasePath}${path}` : path;
