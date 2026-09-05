@@ -41,6 +41,7 @@ export type SiteContent = {
     role: string;
     shortBio: string;
     longBio: string[];
+    aboutBody: string[];
     manifesto: string;
   };
   releases: Release[];
@@ -82,6 +83,11 @@ export const siteContent: SiteContent = {
       "At the core of Busem Aker’s approach is the intensity of the dancefloor. Her sets build gradually through relentless grooves, tension, acid-infused textures and stripped-back rhythmic structures. Moving between hypnotic, raw and peak-time techno, she creates dark, cohesive narratives shaped by the energy of the room.",
       "Alongside her work behind the decks, Busem Aker has translated this musical identity into original productions, releasing Sacred Path, the album The Journey Begins, and My Name Is Fearless. As her sound continues to evolve, her productions are moving further into darker and more uncompromising techno territory, with a focus on hypnotic structures, raw energy and club functionality.",
       "Her music is created for powerful sound systems, dark spaces and the collective energy of the dancefloor, not for algorithms or short-lived trends.",
+    ],
+    aboutBody: [
+      "Busem Aker is a techno DJ rooted in Turkey’s underground club culture, known for her melodic touches, powerful bass lines, and modern rhythms. Shaped by late-night club environments rather than trends, her approach has evolved through performances at key underground venues such as Kastel, Pixel and Kite, as well as international spaces like Khidi, and through her collaboration with Spain-based Heb Sed. Long-form, immersive sets and a deep connection with the crowd remain at the core of her experience.",
+      "Focusing on live-recorded performances, Busem Aker treats each set as a moment-specific journey — reading the room, stretching time, and allowing melody, bass, and rhythm to build gradually. Blending hypnotic techno with melodic movement, her sound unfolds patiently, creating evolving atmospheres that draw listeners into a collective flow on dancefloor. Alongside her work behind the decks, Busem Aker has translated her sound into original productions.",
+      "She released her debut single “Sacred Path” on September 14, followed by her album “The Journey Begins” on September 30, and her single “My Name Is Fearless” on March 8. These releases reflect her focus on melodic structures, emotional depth, and modern techno aesthetics. As her presence within the underground scene grows, Busem Aker remains committed to authenticity and club culture. Her music is designed not for algorithms or playlists, but for powerful sound systems, dimly lit rooms, and the shared energy of dancefloor.",
     ],
     manifesto: "Not every wound asks to be healed. Some become art.",
   },
@@ -139,7 +145,7 @@ export const siteContent: SiteContent = {
       title: "Lacrimosa — visual world",
       eyebrow: "Project film / Coming soon",
       thumbnail: "/reference/lacrimosa-04.png",
-      href: "#music",
+      href: "/music",
     },
     {
       title: "Raw frequency",
@@ -172,11 +178,11 @@ export const siteContent: SiteContent = {
 };
 
 export const navigation = [
-  { label: "Home", href: "/#home" },
-  { label: "About", href: "/#about" },
-  { label: "Music", href: "/#music" },
-  { label: "Shows", href: "/#shows" },
-  { label: "Videos", href: "/#videos" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Music", href: "/music" },
+  { label: "Shows", href: "/shows" },
+  { label: "Videos", href: "/videos" },
   { label: "Press", href: "/press" },
   { label: "Contact", href: "/contact" },
 ] as const;
@@ -215,6 +221,7 @@ export const localizedArtist = {
       "DJ kabininin arkasındaki çalışmalarının yanında bu müzikal kimliği özgün prodüksiyonlarına da taşımıştır. Sacred Path, The Journey Begins albümü ve My Name Is Fearless çalışmalarını yayımlayan Busem Aker, sound’unu daha karanlık ve tavizsiz techno yönünde geliştirmeye devam etmektedir. Prodüksiyonlarında hipnotik yapılar, raw enerji ve kulüp işlevselliği öne çıkar.",
       "Müziği algoritmalar veya kısa ömürlü trendler için değil; güçlü ses sistemleri, karanlık alanlar ve dancefloor’un kolektif enerjisi için üretilir.",
     ],
+    aboutBody: siteContent.artist.aboutBody,
     manifesto: "Her yara iyileşmek istemez. Bazıları sanata dönüşür.",
   },
 } as const;
@@ -258,25 +265,18 @@ export const localizedVideos = {
 export const uiCopy = {
   en: {
     nav: ["Home", "About", "Music", "Shows", "Videos", "Press", "Contact"],
-    headerBooking: "Book Busem",
     primaryNav: "Primary navigation",
     mobileNav: "Mobile navigation",
     footerNav: "Footer navigation",
     openMenu: "Open navigation",
     closeMenu: "Close navigation",
     heroEyebrow: "Turkey / Europe · 2026",
-    heroPhraseReach: ["Busem Aker takes hypnotic techno", "from Turkey to the world"],
-    heroPhraseCareer: ["She turns dark frequencies", "into collective energy"],
     heroCta: "Enter the sound",
-    heroFollowup: "Moving between hypnotic, raw and peak-time techno, she builds immersive sets shaped by tension, progression and collective energy.",
     introKicker: "The artist",
     introHeading: ["Dark rhythms", "hypnotic tension", "collective energy"],
     introCta: "About Busem",
     introFollowup: "Her sets move through tension, acid-infused textures and stripped-back rhythmic structures.",
-    aboutLabel: ["About", "&", "World"],
-    aboutEyebrow: "A sound with gravity",
     aboutHeading: ["Built for", "dark spaces", "and powerful", "systems."],
-    aboutMeta: ["Hypnotic / Raw / Peak-time", "Based in Turkey · Europe facing"],
     featuredProject: "Featured project",
     releaseFormat: "EP / 04 chapters",
     releaseDetails: "Release details",
@@ -289,7 +289,7 @@ export const uiCopy = {
     allBooking: "All booking",
     emptyShows: "New dates are being shaped. Booking enquiries are open for clubs, festivals and international spaces.",
     bookingKicker: "For clubs, festivals and forward-thinking spaces",
-    bookingHeading: ["Book", "Busem"],
+    bookingHeading: ["Bring Busem", "on stage"],
     bookingBody: "Bring a dark, cohesive techno narrative to the room. Direct professional enquiries are welcome.",
     bookingCta: "Booking / Contact",
     prefooterKicker: "Busem Aker · Lacrimosa",
@@ -316,25 +316,18 @@ export const uiCopy = {
   },
   tr: {
     nav: ["Ana Sayfa", "Hakkında", "Müzik", "Etkinlikler", "Videolar", "Basın", "İletişim"],
-    headerBooking: "Booking",
     primaryNav: "Ana navigasyon",
     mobileNav: "Mobil navigasyon",
     footerNav: "Alt bilgi navigasyonu",
     openMenu: "Navigasyonu aç",
     closeMenu: "Navigasyonu kapat",
     heroEyebrow: "Türkiye / Avrupa · 2026",
-    heroPhraseReach: ["Busem Aker, hipnotik technoyu", "Türkiye’den dünyaya taşıyor"],
-    heroPhraseCareer: ["Karanlık frekansları", "kolektif enerjiye dönüştürüyor"],
     heroCta: "Sese gir",
-    heroFollowup: "Hipnotik, raw ve peak-time techno arasında hareket ederek gerilim, ilerleyiş ve kolektif enerjiyle şekillenen sürükleyici setler kurar.",
     introKicker: "Artist",
     introHeading: ["Karanlık ritimler", "hipnotik gerilim", "kolektif enerji"],
     introCta: "Busem hakkında",
     introFollowup: "Setleri; gerilim, acid dokuları ve yalın ritmik yapılar arasında ilerler.",
-    aboutLabel: ["Hakkında", "&", "Dünya"],
-    aboutEyebrow: "Ağırlığı olan bir sound",
     aboutHeading: ["Karanlık", "alanlar", "ve güçlü", "sistemler için."],
-    aboutMeta: ["Hipnotik / Raw / Peak-time", "Türkiye merkezli · Avrupa odaklı"],
     featuredProject: "Öne çıkan proje",
     releaseFormat: "EP / 04 bölüm",
     releaseDetails: "Release detayları",

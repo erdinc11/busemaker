@@ -16,6 +16,7 @@ function assetPath(path: string) {
 }
 
 function useCinematicReveal(scope: React.RefObject<HTMLElement | null>) {
+  const { locale } = useLanguage();
   useEffect(() => {
     if (!scope.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const context = gsap.context(() => {
@@ -33,12 +34,16 @@ function useCinematicReveal(scope: React.RefObject<HTMLElement | null>) {
       });
     }, scope);
     return () => context.revert();
-  }, [scope]);
+  }, [scope, locale]);
 }
 
 function useLocalizedNavigation() {
   const { copy } = useLanguage();
   return navigation.map((item, index) => ({ ...item, label: copy.ui.nav[index] }));
+}
+
+function LanguageFlag({ locale }: { locale: "en" | "tr" }) {
+  return <span className="language-flag" aria-hidden="true">{locale === "en" ? "🇺🇸" : "🇹🇷"}</span>;
 }
 
 export function SiteHeader() {
@@ -57,18 +62,17 @@ export function SiteHeader() {
 
   return (
     <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
-      <Link className="wordmark" href="/#home" aria-label={`Busem Aker ${locale === "tr" ? "ana sayfa" : "home"}`}>
+      <Link className="wordmark" href="/" aria-label={`Busem Aker ${locale === "tr" ? "ana sayfa" : "home"}`}>
         <img className="brand-logo brand-logo--header" src={assetPath(siteContent.assets.logos.light)} alt="Busem Aker" />
       </Link>
       <nav className="header-nav" aria-label={ui.primaryNav}>
         {navItems.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
       </nav>
-      <Link className="header-booking" href="/contact">{ui.headerBooking}</Link>
-      <button className="language-switch" type="button" aria-label={`${ui.languageLabel}: ${ui.switchTo}`} title={`${ui.languageLabel}: ${ui.switchTo}`} onClick={toggleLocale}>
-        <span className="language-switch-label">{ui.languageLabel}</span>
-        <span className="language-switch-full">{ui.switchTo}</span>
-        <span className="language-switch-short">{locale === "en" ? "TR" : "EN"}</span>
-      </button>
+      <div className="language-switch-frame">
+        <button className="language-switch" type="button" aria-label={`${ui.languageLabel}: ${ui.switchTo}`} title={`${ui.languageLabel}: ${ui.switchTo}`} onClick={toggleLocale}>
+          <LanguageFlag locale={locale} />
+        </button>
+      </div>
       <button className="mobile-menu" type="button" aria-label={open ? ui.closeMenu : ui.openMenu} aria-expanded={open} onClick={() => setOpen((value) => !value)}>
         {open ? "×" : "☰"}
       </button>
@@ -87,20 +91,20 @@ function PillButton({ href, children, solid = false }: { href: string; children:
 
 export function Hero() {
   const { copy } = useLanguage();
-  const { artist, ui } = copy;
-  return <section id="home" className="section-shell hero"><Atmosphere src={siteContent.assets.hero} className="atmosphere--hero" /><div className="hero-phrases" aria-label="Artist mission"><p className="hero-phrase hero-phrase--reach">{ui.heroPhraseReach[0]}<br />{ui.heroPhraseReach[1]}</p><p className="hero-phrase hero-phrase--career">{ui.heroPhraseCareer[0]}<br />{ui.heroPhraseCareer[1]}</p></div><div className="section-content"><p className="eyebrow">{ui.heroEyebrow}</p><h1 className="display display--hero accent">BUSEM AKER</h1><div className="hero-details"><p>{artist.shortBio} {ui.heroFollowup}</p><PillButton href="#music" solid>{ui.heroCta}</PillButton></div></div></section>;
+  const { ui } = copy;
+  return <section id="home" className="section-shell hero"><Atmosphere src={siteContent.assets.hero} className="atmosphere--hero" /><div className="section-content"><p className="eyebrow">{ui.heroEyebrow}</p><h1 className="display display--hero accent">BUSEM AKER</h1><div className="hero-details hero-details--cta-only"><PillButton href="/music" solid>{ui.heroCta}</PillButton></div></div></section>;
 }
 
 export function Intro() {
   const { copy } = useLanguage();
   const { artist, ui } = copy;
-  return <section className="section-shell intro"><Atmosphere src={siteContent.assets.intro} className="atmosphere--light" /><div className="section-content intro-layout"><p className="section-kicker">{ui.introKicker}</p><h2 className="display display--section" data-reveal>{ui.introHeading[0]}<br /><span className="muted">{ui.introHeading[1]}</span><br />{ui.introHeading[2]}</h2><div className="intro-copy" data-reveal><p>{artist.shortBio} {ui.introFollowup}</p><PillButton href="#about">{ui.introCta}</PillButton></div></div></section>;
+  return <section className="section-shell intro"><Atmosphere src={siteContent.assets.intro} className="atmosphere--light" /><div className="section-content intro-layout"><p className="section-kicker">{ui.introKicker}</p><h2 className="display display--section" data-reveal>{ui.introHeading[0]}<br /><span className="muted">{ui.introHeading[1]}</span><br />{ui.introHeading[2]}</h2><div className="intro-copy" data-reveal><p>{artist.shortBio} {ui.introFollowup}</p><PillButton href="/about">{ui.introCta}</PillButton></div></div></section>;
 }
 
 export function AboutManifesto() {
   const { copy } = useLanguage();
   const { artist, ui } = copy;
-  return <section id="about" className="section-shell about-manifesto"><Atmosphere src={siteContent.assets.about} /><div className="about-manifesto-grain" aria-hidden="true" /><div className="section-content about-manifesto-grid"><div className="stepped-label" data-reveal>{ui.aboutLabel.map((label) => <span key={label}>{label}</span>)}</div><div className="manifesto-copy"><p className="eyebrow">{ui.aboutEyebrow}</p><h2 className="display" data-reveal>{ui.aboutHeading[0]}<br /><span className="muted">{ui.aboutHeading[1]}</span><br />{ui.aboutHeading[2]}<br /><span className="accent">{ui.aboutHeading[3]}</span></h2><p data-reveal>{artist.longBio[2]}</p><div className="manifesto-divider" /><div className="manifesto-meta"><span>{ui.aboutMeta[0]}</span><span>{ui.aboutMeta[1]}</span></div></div></div></section>;
+  return <section id="about" className="section-shell about-manifesto"><Atmosphere src={siteContent.assets.about} /><div className="about-manifesto-grain" aria-hidden="true" /><div className="section-content about-manifesto-grid"><div className="manifesto-copy"><h2 className="display" data-reveal>{ui.aboutHeading[0]}<br /><span className="muted">{ui.aboutHeading[1]}</span><br />{ui.aboutHeading[2]}<br /><span className="accent">{ui.aboutHeading[3]}</span></h2><div className="manifesto-body" data-reveal>{artist.aboutBody.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div></div></div></section>;
 }
 
 export function Music() {
@@ -174,7 +178,7 @@ export function SiteFooter() {
     toastTimer.current = setTimeout(() => setToastVisible(false), 2500);
   };
 
-  return <><footer className="site-footer"><Atmosphere src={siteContent.assets.footer} /><div className="footer-grid"><div className="footer-column"><Link className="footer-logo" href="/#home" aria-label="Busem Aker ana sayfa"><img className="brand-logo brand-logo--footer" src={assetPath(siteContent.assets.logos.light)} alt="Busem Aker" /></Link><p className="footer-tagline">{ui.footerTagline}</p></div><div className="footer-column"><nav className="footer-nav" aria-label={ui.footerNav}>{navItems.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}</nav></div><div className="footer-column"><nav className="social-list" aria-label="Social media">{socialOrder.map((platform) => <button className="social-link" key={platform} type="button" onClick={showComingSoon} aria-label={`${platformLabels[platform]} — çok yakında`}><span className="social-name"><SocialIcon platform={platform} />{platformLabels[platform]}</span><span className="social-arrow" aria-hidden="true">↗</span></button>)}</nav></div></div><div className="footer-bottom">{ui.footerBottom.map((item) => <span key={item}>{item}</span>)}</div></footer>{toastVisible && <div className="site-toast" role="status" aria-live="polite">Çok yakında</div>}</>;
+  return <><footer className="site-footer"><Atmosphere src={siteContent.assets.footer} /><div className="footer-grid"><div className="footer-column"><Link className="footer-logo" href="/" aria-label="Busem Aker ana sayfa"><img className="brand-logo brand-logo--footer" src={assetPath(siteContent.assets.logos.light)} alt="Busem Aker" /></Link><p className="footer-tagline">{ui.footerTagline}</p></div><div className="footer-column"><nav className="footer-nav" aria-label={ui.footerNav}>{navItems.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}</nav></div><div className="footer-column"><nav className="social-list" aria-label="Social media">{socialOrder.map((platform) => <button className="social-link" key={platform} type="button" onClick={showComingSoon} aria-label={`${platformLabels[platform]} — çok yakında`}><span className="social-name"><SocialIcon platform={platform} />{platformLabels[platform]}</span><span className="social-arrow" aria-hidden="true">↗</span></button>)}</nav></div></div><div className="footer-bottom">{ui.footerBottom.map((item) => <span key={item}>{item}</span>)}</div></footer>{toastVisible && <div className="site-toast" role="status" aria-live="polite">Çok yakında</div>}</>;
 }
 
 function EpkFiles() {
@@ -185,7 +189,29 @@ function EpkFiles() {
 export function HomePage() {
   const scope = useRef<HTMLDivElement>(null);
   useCinematicReveal(scope);
-  return <div className="site-shell" ref={scope}><SiteHeader /><main><Hero /><Intro /><AboutManifesto /><Music /><Videos /><Shows /><BookingBand /><Prefooter /></main><SiteFooter /></div>;
+  return <div className="site-shell" ref={scope}><SiteHeader /><main><Hero /><Intro /><Prefooter /></main><SiteFooter /></div>;
+}
+
+function SectionPage({ children }: { children: React.ReactNode }) {
+  const scope = useRef<HTMLDivElement>(null);
+  useCinematicReveal(scope);
+  return <div className="site-shell" ref={scope}><SiteHeader /><main>{children}</main><SiteFooter /></div>;
+}
+
+export function AboutPage() {
+  return <SectionPage><AboutManifesto /></SectionPage>;
+}
+
+export function MusicPage() {
+  return <SectionPage><Music /></SectionPage>;
+}
+
+export function ShowsPage() {
+  return <SectionPage><Shows /><BookingBand /></SectionPage>;
+}
+
+export function VideosPage() {
+  return <SectionPage><Videos /></SectionPage>;
 }
 
 export function PressPage() {
