@@ -9,6 +9,7 @@ export type SocialPlatform =
   | "instagram"
   | "spotify"
   | "soundcloud"
+  | "appleMusic"
   | "youtube"
   | "beatport"
   | "tiktok";
@@ -154,7 +155,13 @@ export const siteContent: SiteContent = {
       href: "/contact/",
     },
   ],
-  links: {},
+  links: {
+    instagram: "https://www.instagram.com/busemaker_/",
+    spotify: "https://open.spotify.com/intl-tr/artist/1GiCbC5kla9vUnMTRfoojJ?si=8df09AiuQcKlg091te3vCA",
+    soundcloud: "https://soundcloud.com/busemaker",
+    appleMusic: "https://music.apple.com/tr/artist/busem-aker/1839207488?l=tr",
+    beatport: "https://www.beatport.com/artist/busem-aker/2366871",
+  },
   booking: {},
   assets: {
     logos: {
@@ -191,6 +198,7 @@ export const platformLabels: Record<SocialPlatform, string> = {
   instagram: "Instagram",
   spotify: "Spotify",
   soundcloud: "SoundCloud",
+  appleMusic: "Apple Music",
   youtube: "YouTube",
   beatport: "Beatport",
   tiktok: "TikTok",
@@ -200,6 +208,7 @@ export const socialOrder: SocialPlatform[] = [
   "instagram",
   "spotify",
   "soundcloud",
+  "appleMusic",
   "youtube",
   "beatport",
   "tiktok",

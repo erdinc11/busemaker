@@ -152,6 +152,8 @@ function SocialIcon({ platform }: { platform: SocialPlatform }) {
       return <svg {...props} fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.7"><circle cx="12" cy="12" r="8.75" /><path d="M7.2 9.6c3.4-1 6.8-.8 9.7.5M7.8 12.5c2.7-.7 5.5-.5 8 .5M8.7 15.2c2-.4 4-.2 5.9.5" /></svg>;
     case "soundcloud":
       return <svg {...props} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7"><path d="M4 17.5h15.1a2.9 2.9 0 0 0 .1-5.8 6.6 6.6 0 0 0-12.2-1.8A3.2 3.2 0 0 0 4 17.5Z" /><path d="M4 14v2.5M6.5 12.7v3.8M9 12v4.5M11.5 12.4v4.1" /></svg>;
+    case "appleMusic":
+      return <svg {...props} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7"><path d="M9.4 17.8V7.2l8.5-1.7v10.3" /><path d="M9.4 9.6 17.9 8" /><ellipse cx="6.9" cy="18" rx="2.5" ry="1.9" /><ellipse cx="15.4" cy="16.1" rx="2.5" ry="1.9" /></svg>;
     case "youtube":
       return <svg {...props} fill="none" stroke="currentColor" strokeWidth="1.7"><rect x="3" y="5.5" width="18" height="13" rx="4" /><path d="m10 9 5 3.1-5 3.1V9Z" fill="currentColor" stroke="none" /></svg>;
     case "beatport":
@@ -159,6 +161,17 @@ function SocialIcon({ platform }: { platform: SocialPlatform }) {
     case "tiktok":
       return <svg {...props} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7"><path d="M14 5v9.1a3.7 3.7 0 1 1-2.7-3.6" /><path d="M14 5c.6 2.2 2.1 3.5 4.5 3.7" /></svg>;
   }
+}
+
+function SocialLink({ platform, onComingSoon }: { platform: SocialPlatform; onComingSoon: () => void }) {
+  const href = siteContent.links[platform];
+  const content = <><span className="social-name"><SocialIcon platform={platform} />{platformLabels[platform]}</span><span className="social-arrow" aria-hidden="true">↗</span></>;
+
+  if (href) {
+    return <a className="social-link" href={href} target="_blank" rel="noreferrer" aria-label={`${platformLabels[platform]} — yeni sekmede aç`}>{content}</a>;
+  }
+
+  return <button className="social-link" type="button" onClick={onComingSoon} aria-label={`${platformLabels[platform]} — çok yakında`}>{content}</button>;
 }
 
 export function SiteFooter() {
@@ -178,7 +191,7 @@ export function SiteFooter() {
     toastTimer.current = setTimeout(() => setToastVisible(false), 2500);
   };
 
-  return <><footer className="site-footer"><Atmosphere src={siteContent.assets.footer} /><div className="footer-grid"><div className="footer-column"><Link className="footer-logo" href="/" aria-label="Busem Aker ana sayfa"><img className="brand-logo brand-logo--footer" src={assetPath(siteContent.assets.logos.light)} alt="Busem Aker" /></Link><p className="footer-tagline">{ui.footerTagline}</p></div><div className="footer-column"><nav className="footer-nav" aria-label={ui.footerNav}>{navItems.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}</nav></div><div className="footer-column"><nav className="social-list" aria-label="Social media">{socialOrder.map((platform) => <button className="social-link" key={platform} type="button" onClick={showComingSoon} aria-label={`${platformLabels[platform]} — çok yakında`}><span className="social-name"><SocialIcon platform={platform} />{platformLabels[platform]}</span><span className="social-arrow" aria-hidden="true">↗</span></button>)}</nav></div></div><div className="footer-bottom">{ui.footerBottom.map((item) => <span key={item}>{item}</span>)}</div></footer>{toastVisible && <div className="site-toast" role="status" aria-live="polite">Çok yakında</div>}</>;
+  return <><footer className="site-footer"><Atmosphere src={siteContent.assets.footer} /><div className="footer-grid"><div className="footer-column"><Link className="footer-logo" href="/" aria-label="Busem Aker ana sayfa"><img className="brand-logo brand-logo--footer" src={assetPath(siteContent.assets.logos.light)} alt="Busem Aker" /></Link><p className="footer-tagline">{ui.footerTagline}</p></div><div className="footer-column"><nav className="footer-nav" aria-label={ui.footerNav}>{navItems.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}</nav></div><div className="footer-column"><nav className="social-list" aria-label="Social media">{socialOrder.map((platform) => <SocialLink key={platform} platform={platform} onComingSoon={showComingSoon} />)}</nav></div></div><div className="footer-bottom">{ui.footerBottom.map((item) => <span key={item}>{item}</span>)}</div></footer>{toastVisible && <div className="site-toast" role="status" aria-live="polite">Çok yakında</div>}</>;
 }
 
 function EpkFiles() {
