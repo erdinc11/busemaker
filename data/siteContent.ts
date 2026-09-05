@@ -180,7 +180,7 @@ export const siteContent: SiteContent = {
 export const navigation = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Music", href: "/music" },
+  { label: "Discography", href: "/music" },
   { label: "Shows", href: "/shows" },
   { label: "Videos", href: "/videos" },
   { label: "Press", href: "/press" },
@@ -264,7 +264,7 @@ export const localizedVideos = {
 
 export const uiCopy = {
   en: {
-    nav: ["Home", "About", "Music", "Shows", "Videos", "Press", "Contact"],
+    nav: ["Home", "About", "Discography", "Shows", "Videos", "Press", "Contact"],
     primaryNav: "Primary navigation",
     mobileNav: "Mobile navigation",
     footerNav: "Footer navigation",
@@ -310,12 +310,12 @@ export const uiCopy = {
     missingEmail: "Booking email will be published here once confirmed.",
     footerTagline: "Techno DJ & producer rooted in Turkey’s underground club culture.",
     footerLinksPending: "Music and social links will appear here as soon as the official profiles are confirmed.",
-    footerBottom: ["© 2026 BUSEM AKER", "Dark spaces / deep frequencies", "International booking"],
+    footerBottom: ["© 2026 BUSEM AKER"],
     languageLabel: "Language",
     switchTo: "Türkçe",
   },
   tr: {
-    nav: ["Ana Sayfa", "Hakkında", "Müzik", "Etkinlikler", "Videolar", "Basın", "İletişim"],
+    nav: ["Ana Sayfa", "Hakkında", "Diskografi", "Etkinlikler", "Videolar", "Basın", "İletişim"],
     primaryNav: "Ana navigasyon",
     mobileNav: "Mobil navigasyon",
     footerNav: "Alt bilgi navigasyonu",
@@ -361,7 +361,7 @@ export const uiCopy = {
     missingEmail: "Booking e-postası kesinleştiğinde burada yayımlanacaktır.",
     footerTagline: "Türkiye’nin underground kulüp kültüründen beslenen techno DJ ve prodüktör.",
     footerLinksPending: "Resmî profiller doğrulandığında müzik ve sosyal medya linkleri burada görünecek.",
-    footerBottom: ["© 2026 BUSEM AKER", "Karanlık alanlar / derin frekanslar", "Uluslararası booking"],
+    footerBottom: ["© 2026 BUSEM AKER"],
     languageLabel: "Dil",
     switchTo: "English",
   },
