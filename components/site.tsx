@@ -98,7 +98,7 @@ export function Hero() {
 export function Intro() {
   const { copy } = useLanguage();
   const { artist, ui } = copy;
-  return <section className="section-shell intro"><Atmosphere src={siteContent.assets.intro} className="atmosphere--light" /><div className="section-content intro-layout"><p className="section-kicker">{ui.introKicker}</p><h2 className="display display--section" data-reveal>{ui.introHeading[0]}<br /><span className="muted">{ui.introHeading[1]}</span><br />{ui.introHeading[2]}</h2><div className="intro-copy" data-reveal><p>{artist.shortBio} {ui.introFollowup}</p><PillButton href="/about">{ui.introCta}</PillButton></div></div></section>;
+  return <section className="section-shell intro"><Atmosphere src={siteContent.assets.intro} className="atmosphere--light" /><div className="section-content intro-layout"><p className="section-kicker">{ui.introKicker}</p><div className="intro-copy" data-reveal><p>{artist.shortBio} {ui.introFollowup}</p><PillButton href="/about">{ui.introCta}</PillButton></div></div></section>;
 }
 
 export function AboutManifesto() {
