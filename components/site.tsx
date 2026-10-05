@@ -95,12 +95,6 @@ export function Hero() {
   return <section id="home" className="section-shell hero"><Atmosphere src={siteContent.assets.hero} className="atmosphere--hero" /><div className="section-content"><p className="eyebrow">{ui.heroEyebrow}</p><h1 className="display display--hero accent">BUSEM AKER</h1><div className="hero-details hero-details--cta-only"><PillButton href="/music" solid>{ui.heroCta}</PillButton></div></div></section>;
 }
 
-export function Intro() {
-  const { copy } = useLanguage();
-  const { artist, ui } = copy;
-  return <section className="section-shell intro"><Atmosphere src={siteContent.assets.intro} className="atmosphere--light" /><div className="section-content intro-layout"><p className="section-kicker">{ui.introKicker}</p><div className="intro-copy" data-reveal><p>{artist.shortBio} {ui.introFollowup}</p><PillButton href="/about">{ui.introCta}</PillButton></div></div></section>;
-}
-
 export function AboutManifesto() {
   const { copy } = useLanguage();
   const { artist, ui } = copy;
@@ -202,7 +196,7 @@ function EpkFiles() {
 export function HomePage() {
   const scope = useRef<HTMLDivElement>(null);
   useCinematicReveal(scope);
-  return <div className="site-shell" ref={scope}><SiteHeader /><main><Hero /><Intro /><Prefooter /></main><SiteFooter /></div>;
+  return <div className="site-shell" ref={scope}><SiteHeader /><main><Hero /><Prefooter /></main><SiteFooter /></div>;
 }
 
 function SectionPage({ children }: { children: React.ReactNode }) {
