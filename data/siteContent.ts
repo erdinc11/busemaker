@@ -11,8 +11,7 @@ export type SocialPlatform =
   | "soundcloud"
   | "appleMusic"
   | "youtube"
-  | "beatport"
-  | "tiktok";
+  | "beatport";
 
 export type Show = {
   date: string;
@@ -201,17 +200,15 @@ export const platformLabels: Record<SocialPlatform, string> = {
   appleMusic: "Apple Music",
   youtube: "YouTube",
   beatport: "Beatport",
-  tiktok: "TikTok",
 };
 
 export const socialOrder: SocialPlatform[] = [
   "instagram",
   "spotify",
+  "youtube",
   "soundcloud",
   "appleMusic",
-  "youtube",
   "beatport",
-  "tiktok",
 ];
 
 export type Locale = "en" | "tr";

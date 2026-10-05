@@ -152,26 +152,23 @@ function SocialIcon({ platform }: { platform: SocialPlatform }) {
       return <svg {...props} fill="none" stroke="currentColor" strokeWidth="1.7"><rect x="3" y="5.5" width="18" height="13" rx="4" /><path d="m10 9 5 3.1-5 3.1V9Z" fill="currentColor" stroke="none" /></svg>;
     case "beatport":
       return <svg {...props} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7"><path d="M7 5v14M7 5h5.4a3.2 3.2 0 0 1 0 6.4H7m0 0h6.2a3.8 3.8 0 0 1 0 7.6H7" /></svg>;
-    case "tiktok":
-      return <svg {...props} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7"><path d="M14 5v9.1a3.7 3.7 0 1 1-2.7-3.6" /><path d="M14 5c.6 2.2 2.1 3.5 4.5 3.7" /></svg>;
   }
 }
 
 function SocialLink({ platform, onComingSoon }: { platform: SocialPlatform; onComingSoon: () => void }) {
   const href = siteContent.links[platform];
-  const content = <><span className="social-name"><SocialIcon platform={platform} />{platformLabels[platform]}</span><span className="social-arrow" aria-hidden="true">↗</span></>;
+  const label = platformLabels[platform];
 
   if (href) {
-    return <a className="social-link" href={href} target="_blank" rel="noreferrer" aria-label={`${platformLabels[platform]} — yeni sekmede aç`}>{content}</a>;
+    return <a className="social-link" href={href} target="_blank" rel="noreferrer" aria-label={`${label} — yeni sekmede aç`} title={label}><SocialIcon platform={platform} /></a>;
   }
 
-  return <button className="social-link" type="button" onClick={onComingSoon} aria-label={`${platformLabels[platform]} — çok yakında`}>{content}</button>;
+  return <button className="social-link" type="button" onClick={onComingSoon} aria-label={`${label} — çok yakında`} title={label}><SocialIcon platform={platform} /></button>;
 }
 
 export function SiteFooter() {
   const { copy } = useLanguage();
   const { ui } = copy;
-  const navItems = useLocalizedNavigation();
   const [toastVisible, setToastVisible] = useState(false);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -185,7 +182,7 @@ export function SiteFooter() {
     toastTimer.current = setTimeout(() => setToastVisible(false), 2500);
   };
 
-  return <><footer className="site-footer"><Atmosphere src={siteContent.assets.footer} /><div className="footer-grid"><div className="footer-column"><Link className="footer-logo" href="/" aria-label="Busem Aker ana sayfa"><img className="brand-logo brand-logo--footer" src={assetPath(siteContent.assets.logos.light)} alt="Busem Aker" /></Link><p className="footer-tagline">{ui.footerTagline}</p></div><div className="footer-column"><nav className="footer-nav" aria-label={ui.footerNav}>{navItems.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}</nav></div><div className="footer-column"><nav className="social-list" aria-label="Social media">{socialOrder.map((platform) => <SocialLink key={platform} platform={platform} onComingSoon={showComingSoon} />)}</nav></div></div><div className="footer-bottom">{ui.footerBottom.map((item) => <span key={item}>{item}</span>)}</div></footer>{toastVisible && <div className="site-toast" role="status" aria-live="polite">Çok yakında</div>}</>;
+  return <><footer className="site-footer"><Atmosphere src={siteContent.assets.footer} /><div className="footer-inner"><div className="footer-brand"><Link className="footer-logo" href="/" aria-label="Busem Aker ana sayfa"><img className="brand-logo brand-logo--footer" src={assetPath(siteContent.assets.logos.light)} alt="Busem Aker" /></Link><p className="footer-tagline">{ui.footerTagline}</p></div><nav className="social-row" aria-label="Social media">{socialOrder.map((platform) => <SocialLink key={platform} platform={platform} onComingSoon={showComingSoon} />)}</nav></div><div className="footer-bottom">{ui.footerBottom.map((item) => <span key={item}>{item}</span>)}</div></footer>{toastVisible && <div className="site-toast" role="status" aria-live="polite">Çok yakında</div>}</>;
 }
 
 function EpkFiles() {
