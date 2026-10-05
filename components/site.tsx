@@ -182,7 +182,7 @@ export function SiteFooter() {
     toastTimer.current = setTimeout(() => setToastVisible(false), 2500);
   };
 
-  return <><footer className="site-footer"><Atmosphere src={siteContent.assets.footer} /><div className="footer-inner"><div className="footer-brand"><Link className="footer-logo" href="/" aria-label="Busem Aker ana sayfa"><img className="brand-logo brand-logo--footer" src={assetPath(siteContent.assets.logos.light)} alt="Busem Aker" /></Link><p className="footer-tagline">{ui.footerTagline}</p></div><nav className="social-row" aria-label="Social media">{socialOrder.map((platform) => <SocialLink key={platform} platform={platform} onComingSoon={showComingSoon} />)}</nav></div><div className="footer-bottom">{ui.footerBottom.map((item) => <span key={item}>{item}</span>)}</div></footer>{toastVisible && <div className="site-toast" role="status" aria-live="polite">Çok yakında</div>}</>;
+  return <><footer className="site-footer"><Atmosphere src={siteContent.assets.footer} /><div className="footer-inner"><Link className="footer-logo" href="/" aria-label="Busem Aker ana sayfa"><img className="brand-logo brand-logo--footer" src={assetPath(siteContent.assets.logos.light)} alt="Busem Aker" /></Link><nav className="social-row" aria-label="Social media">{socialOrder.map((platform) => <SocialLink key={platform} platform={platform} onComingSoon={showComingSoon} />)}</nav><div className="footer-bottom">{ui.footerBottom.map((item) => <span key={item}>{item}</span>)}</div></div></footer>{toastVisible && <div className="site-toast" role="status" aria-live="polite">Çok yakında</div>}</>;
 }
 
 function EpkFiles() {
